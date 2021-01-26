@@ -20,5 +20,6 @@ volcano_map = folium.Map(location=[35.7796,-78.6382],zoom_start=6,tiles="Stamen 
 fg = folium.FeatureGroup(name="My Map")
 for i in marker_data.index:
     fg.add_child(folium.Marker(location=[marker_data['LAT'][i],marker_data['LON'][i]],popup="Hi I am a Marker",icon=folium.Icon(color="blue")))
-
 volcano_map.add_child(fg)
+
+volcano_map.save("./Map.html")

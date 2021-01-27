@@ -12,14 +12,26 @@ import pandas
 # )
 
 volcano_data=pandas.read_csv('./Volcanoes.txt')
-marker_data=volcano_data.loc[0: len(volcano_data) ,'LAT':'LON']
-print(marker_data)
+marker_data=volcano_data.loc[0: len(volcano_data) ,['LAT','LON','ELEV']]
 
 volcano_map = folium.Map(location=[35.7796,-78.6382],zoom_start=6,tiles="Stamen Terrain")
 
 fg = folium.FeatureGroup(name="My Map")
+
 for i in marker_data.index:
-    fg.add_child(folium.Marker(location=[marker_data['LAT'][i],marker_data['LON'][i]],popup="Hi I am a Marker",icon=folium.Icon(color="blue")))
+    lat = marker_data['LAT'][i]
+    lon = marker_data['LON'][i]
+    el = marker_data['ELEV'][i]
+    html = """
+    <div style="    display: flex;width: 150px;flex-direction: column;">
+        <h4 style="font-size: 2rem;">Volcano Info:</h4>
+        <span style="font-size:1rem">
+            Height: {height} m
+        </span>
+    </div>
+    """.format(height=el)
+    iframe = folium.IFrame(html=html, width=200, height=100)
+    fg.add_child(folium.Marker(location=[lat,lon],popup=html,icon=folium.Icon(color="blue")))
 volcano_map.add_child(fg)
 
 volcano_map.save("./Map.html")

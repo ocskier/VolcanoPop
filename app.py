@@ -47,4 +47,6 @@ for i in marker_data.index:
 
 fg.add_child(folium.GeoJson(data=(open('./world.json','r', encoding='utf-8-sig').read()),style_function=lambda x: {'fillOpacity':0.3,'fillColor': 'yellow' if x['properties']['POP2005'] <= 10000000 else 'darkgreen' if x['properties']['POP2005'] > 10000000 and x['properties']['POP2005'] <= 300000000 else 'blue'}))
 
+volcano_map.add_child(folium.LayerControl())
+
 volcano_map.save("./index.html")

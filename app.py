@@ -34,4 +34,4 @@ for i in marker_data.index:
     fg.add_child(folium.Marker(location=[lat,lon],popup=html,icon=folium.Icon(color="blue")))
 volcano_map.add_child(fg)
 
-volcano_map.save("./Map.html")
+volcano_map.save("./index.html")

@@ -39,7 +39,7 @@ for i in marker_data.index:
     </div>
     """.format(height=el)
     iframe = folium.IFrame(html=html, width=200, height=100)
-    fg.add_child(folium.Marker(location=[lat,lon],popup=html,icon=folium.Icon(color=correctColor(int(el)))))
+    fg.add_child(folium.Marker(location=[lat,lon],popup=html,icon=folium.Icon(color=correctColor(int(el)),icon="fa-area-chart", prefix='fa')))
     volcano_map.add_child(fg)
 
 volcano_map.save("./index.html")

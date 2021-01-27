@@ -12,9 +12,9 @@ import pandas
 # )
 
 volcano_data=pandas.read_csv('./Volcanoes.txt')
-marker_data=volcano_data.loc[0: len(volcano_data) ,['LAT','LON','ELEV']]
+marker_data=volcano_data.loc[0: len(volcano_data) ,['LAT','LON','ELEV','NAME']]
 
-volcano_map = folium.Map(location=[marker_data.mean()['LAT'],marker_data.mean()['LON']],zoom_start=5,tiles="Stamen Terrain")
+volcano_map = folium.Map(location=[marker_data.mean()['LAT'],marker_data.mean()['LON']],zoom_start=4,tiles="Stamen Terrain")
 
 fg = folium.FeatureGroup(name="My Map")
 
@@ -30,14 +30,17 @@ for i in marker_data.index:
     lat = marker_data['LAT'][i]
     lon = marker_data['LON'][i]
     el = marker_data['ELEV'][i]
+    name = marker_data['NAME'][i]
+
     html = """
     <div style="display: flex;width: 150px;flex-direction: column;">
-        <h4 style="font-size: 2rem;">Volcano Info:</h4>
+        <h4 style="font-size: 1.5rem;">Mt. {name}</h4>
         <span style="font-size:1.2rem">
             Height: {height} m
         </span>
     </div>
-    """.format(height=el)
+    """.format(height=el,name=name)
+
     iframe = folium.IFrame(html=html, width=200, height=100)
     fg.add_child(folium.Marker(location=[lat,lon],popup=html,icon=folium.Icon(color=correctColor(int(el)),icon="fa-area-chart", prefix='fa')))
     volcano_map.add_child(fg)

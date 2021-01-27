@@ -42,4 +42,6 @@ for i in marker_data.index:
     fg.add_child(folium.Marker(location=[lat,lon],popup=html,icon=folium.Icon(color=correctColor(int(el)),icon="fa-area-chart", prefix='fa')))
     volcano_map.add_child(fg)
 
+fg.add_child(folium.GeoJson(data=(open('./world.json','r', encoding='utf-8-sig').read())))
+
 volcano_map.save("./index.html")

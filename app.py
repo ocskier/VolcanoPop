@@ -18,6 +18,14 @@ volcano_map = folium.Map(location=[marker_data.mean()['LAT'],marker_data.mean()[
 
 fg = folium.FeatureGroup(name="My Map")
 
+def correctColor(value):
+    if value < 2000:
+        return 'gray'
+    elif value >= 2000 and value <= 3000:
+        return 'red'
+    else: 
+        return 'blue'
+
 for i in marker_data.index:
     lat = marker_data['LAT'][i]
     lon = marker_data['LON'][i]
@@ -31,7 +39,7 @@ for i in marker_data.index:
     </div>
     """.format(height=el)
     iframe = folium.IFrame(html=html, width=200, height=100)
-    fg.add_child(folium.Marker(location=[lat,lon],popup=html,icon=folium.Icon(color="blue")))
+    fg.add_child(folium.Marker(location=[lat,lon],popup=html,icon=folium.Icon(color=correctColor(int(el)))))
     volcano_map.add_child(fg)
 
 volcano_map.save("./index.html")

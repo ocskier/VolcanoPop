@@ -14,7 +14,7 @@ import pandas
 volcano_data=pandas.read_csv('./Volcanoes.txt')
 marker_data=volcano_data.loc[0: len(volcano_data) ,['LAT','LON','ELEV']]
 
-volcano_map = folium.Map(location=[35.7796,-78.6382],zoom_start=6,tiles="Stamen Terrain")
+volcano_map = folium.Map(location=[marker_data.mean()['LAT'],marker_data.mean()['LON']],zoom_start=6,tiles="Stamen Terrain")
 
 fg = folium.FeatureGroup(name="My Map")
 
@@ -23,9 +23,9 @@ for i in marker_data.index:
     lon = marker_data['LON'][i]
     el = marker_data['ELEV'][i]
     html = """
-    <div style="    display: flex;width: 150px;flex-direction: column;">
+    <div style="display: flex;width: 150px;flex-direction: column;">
         <h4 style="font-size: 2rem;">Volcano Info:</h4>
-        <span style="font-size:1rem">
+        <span style="font-size:1.2rem">
             Height: {height} m
         </span>
     </div>

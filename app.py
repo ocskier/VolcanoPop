@@ -45,6 +45,6 @@ for i in marker_data.index:
     fg.add_child(folium.Marker(location=[lat,lon],popup=html,icon=folium.Icon(color=correctColor(int(el)),icon="fa-area-chart", prefix='fa')))
     volcano_map.add_child(fg)
 
-fg.add_child(folium.GeoJson(data=(open('./world.json','r', encoding='utf-8-sig').read())))
+fg.add_child(folium.GeoJson(data=(open('./world.json','r', encoding='utf-8-sig').read()),style_function=lambda x: {'fillOpacity':0.3,'fillColor': 'yellow' if x['properties']['POP2005'] <= 10000000 else 'darkgreen' if x['properties']['POP2005'] > 10000000 and x['properties']['POP2005'] <= 300000000 else 'blue'}))
 
 volcano_map.save("./index.html")

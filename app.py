@@ -32,6 +32,6 @@ for i in marker_data.index:
     """.format(height=el)
     iframe = folium.IFrame(html=html, width=200, height=100)
     fg.add_child(folium.Marker(location=[lat,lon],popup=html,icon=folium.Icon(color="blue")))
-volcano_map.add_child(fg)
+    volcano_map.add_child(fg)
 
 volcano_map.save("./index.html")

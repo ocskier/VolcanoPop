@@ -1,6 +1,7 @@
 import settings
 import os
 import mysql.connector
+import requests
 import folium
 import pandas
 
@@ -11,10 +12,13 @@ import pandas
 #     database = "db"
 # )
 
+response = requests.get("https://www.ngdc.noaa.gov/hazel/hazard-service//api/v1/volcanoes")
+data = response.json()
+
 volcano_data=pandas.read_csv('./Volcanoes.txt')
 marker_data=volcano_data.loc[0: len(volcano_data) ,['LAT','LON','ELEV','NAME']]
 
-volcano_map = folium.Map(location=[marker_data.mean()['LAT'],marker_data.mean()['LON']],zoom_start=4,tiles="Stamen Terrain")
+volcano_map = folium.Map(location=[marker_data.mean()['LAT'],marker_data.mean()['LON']],zoom_start=2,tiles="Stamen Terrain")
 
 fg1 = folium.FeatureGroup(name="Volcanoes")
 
@@ -26,11 +30,17 @@ def correctColor(value):
     else: 
         return 'blue'
 
-for i in marker_data.index:
-    lat = marker_data['LAT'][i]
-    lon = marker_data['LON'][i]
-    el = marker_data['ELEV'][i]
-    name = marker_data['NAME'][i]
+for volcano in data["items"]:
+    lat = volcano['latitude']
+    lon = volcano['longitude']
+    el = volcano['elevation']
+    name = volcano['name']
+
+# for i in marker_data.index:
+#     lat = marker_data['LAT'][i]
+#     lon = marker_data['LON'][i]
+#     el = marker_data['ELEV'][i]
+#     name = marker_data['NAME'][i]
 
     html = """
     <div style="display: flex;width: 150px;flex-direction: column;">

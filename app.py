@@ -18,7 +18,7 @@ data = response.json()
 volcano_data=pandas.read_csv('./Volcanoes.txt')
 marker_data=volcano_data.loc[0: len(volcano_data) ,['LAT','LON','ELEV','NAME']]
 
-volcano_map = folium.Map(location=[marker_data.mean()['LAT'],marker_data.mean()['LON']],zoom_start=2,tiles="Stamen Terrain")
+volcano_map = folium.Map(location=[marker_data.mean()['LAT'],marker_data.mean()['LON']],min_zoom=2,zoom_start=2,max_bounds = True, prefer_canvas=True, tiles="Stamen Terrain")
 
 fg1 = folium.FeatureGroup(name="Volcanoes")
 

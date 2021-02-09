@@ -34,7 +34,7 @@ N/A
 
 ## Deployment
 
-[Live Site](Heroku)
+[Live Site](https://ocskier.github.io/VolcanoPop/)
 
 ## Authors
 

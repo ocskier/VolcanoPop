@@ -14,6 +14,8 @@ A Python based app using Folium to generate a layered map of world volcanos on p
 
 <a href="https://www.python.org/"><img width=160 height=80 src="https://www.python.org/static/img/python-logo@2x.png"></a>
 
+<a href="https://pypi.org/project/pipenv/" style="display:inline-grid; text-align:center;margin-left: -20px"><img width=160 height=80 src="https://pypi.org/static/images/logo-small.6eef541e.svg">pipenv</a>
+
 ## Installation
 
 pipenv install
